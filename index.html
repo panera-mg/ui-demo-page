@@ -12,13 +12,15 @@
     const system = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
     const color = localStorage.getItem(`${prefix}theme/activeColor`)?.replace(/"/g, '');
     const theme = localStorage.getItem(`${prefix}theme/activeTheme`)?.replace(/"/g, '') || system;
+    const direction = localStorage.getItem(`${prefix}theme/activeDirection`)?.replace(/"/g, '') || 'ltr';
     if (color) document.documentElement.style.setProperty('--colors-primary', color);
     document.documentElement.classList.remove('light', 'dark');
     document.documentElement.classList.add(theme === 'system' ? system : theme);
+    document.documentElement.setAttribute('dir', direction);
 
   </script>
-  <script type="module" crossorigin src="./assets/main-CzzdKagU.js"></script>
-  <link rel="stylesheet" crossorigin href="./assets/main-C4mEdVdY.css">
+  <script type="module" crossorigin src="./assets/main-CvphXiRW.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/main-D23hZ7jY.css">
 </head>
 
 <body class="font-sans text-base overflow-x-hidden" light="bg-white text-body-text-color-light" dark="bg-dark text-body-text-color-dark">
@@ -152,7 +154,7 @@
         Theme
       </div>
 
-      <div class="flex flex-nowrap gap-2">
+      <div class="flex flex-nowrap gap-2 mb-4">
         <div class="flex-1 customizer-theme cursor-pointer">
           <div class="border-2 flex items-center h-11 justify-center rounded-md mb-1 customizer-theme__element" light="border-primary" dark="border-primary" hover="border-primary" data-active="true">
             <label for="customizer-theme-light" class="cursor-pointer">
@@ -184,6 +186,64 @@
           </div>
           <div class="text-sm text-body-text-secondary-light">
             System
+          </div>
+        </div>
+      </div>
+
+      <div class="fw-500 mb-2">
+        Direction
+      </div>
+
+      <div class="flex flex-nowrap gap-2">
+        <div class="customizer-direction cursor-pointer">
+          <div class="border-2 flex items-center justify-center rounded-md mb-1 customizer-direction__element" light="border-primary" dark="border-primary" hover="border-primary" data-active="true">
+            <label for="customizer-direction-ltr" class="cursor-pointer">
+              <svg data-v-638132f3="" xmlns="http://www.w3.org/2000/svg" width="104" height="66" fill="none" class="custom-radio-image">
+                <rect width="104" height="66" fill="currentColor" fill-opacity=".02" rx="4"></rect>
+                <rect width="24.098" height="57.589" x="5.202" y="4.121" fill="currentColor" fill-opacity=".08" rx="2"></rect>
+                <rect width="13.854" height="2.092" x="10.323" y="16.87" fill="currentColor" fill-opacity=".3" rx="1.046"></rect>
+                <rect width="9.879" height="2.092" x="10.323" y="25.562" fill="currentColor" fill-opacity=".3" rx="1.046"></rect>
+                <rect width="12.383" height="2.092" x="10.323" y="34.254" fill="currentColor" fill-opacity=".3" rx="1.046"></rect>
+                <rect width="6.088" height="2.092" x="10.323" y="42.946" fill="currentColor" fill-opacity=".3" rx="1.046"></rect>
+                <rect width="8.091" height="2.092" x="10.323" y="51.638" fill="currentColor" fill-opacity=".3" rx="1.046"></rect>
+                <rect width="62.389" height="57.589" x="35.514" y="4.121" fill="currentColor" fill-opacity=".08" rx="2"></rect>
+                <rect width="13.854" height="2.092" x="43.758" y="14.183" fill="currentColor" fill-opacity=".3" rx="1.046"></rect>
+                <rect width="32.801" height="2.092" x="43.758" y="22.875" fill="currentColor" fill-opacity=".3" rx="1.046"></rect>
+                <rect width="41.208" height="2.092" x="43.758" y="31.567" fill="currentColor" fill-opacity=".3" rx="1.046"></rect>
+                <rect width="32.801" height="2.092" x="43.758" y="40.259" fill="currentColor" fill-opacity=".3" rx="1.046"></rect>
+                <rect width="5.775" height="2.092" x="43.758" y="48.952" fill="currentColor" fill-opacity=".3" rx="1.046"></rect>
+              </svg>
+            </label>
+            <input type="checkbox" id="customizer-direction-ltr" class="hidden" data-direction="ltr" />
+          </div>
+          <div class="text-sm text-body-text-secondary-light">
+            Left to right
+          </div>
+        </div>
+
+        <div class="customizer-direction cursor-pointer">
+          <div class="border-2 flex items-center justify-center rounded-md mb-1 customizer-direction__element" light="border-divider-light" dark="border-divider-dark" hover="border-primary">
+            <label for="customizer-direction-rtl" class="cursor-pointer">
+              <svg data-v-638132f3="" xmlns="http://www.w3.org/2000/svg" width="104" height="66" fill="none" class="custom-radio-image">
+                <rect width="104" height="66" fill="currentColor" fill-opacity=".02" rx="4"></rect>
+                <rect width="24.098" height="57.589" x="73.476" y="4.121" fill="currentColor" fill-opacity=".08" rx="2"></rect>
+                <rect width="13.854" height="2.092" x="78.599" y="16.87" fill="currentColor" fill-opacity=".3" rx="1.046"></rect>
+                <rect width="9.879" height="2.092" x="82.571" y="25.562" fill="currentColor" fill-opacity=".3" rx="1.046"></rect>
+                <rect width="12.383" height="2.092" x="80.069" y="34.254" fill="currentColor" fill-opacity=".3" rx="1.046"></rect>
+                <rect width="6.088" height="2.092" x="86.363" y="42.946" fill="currentColor" fill-opacity=".3" rx="1.046"></rect>
+                <rect width="8.091" height="2.092" x="84.361" y="51.638" fill="currentColor" fill-opacity=".3" rx="1.046"></rect>
+                <rect width="62.389" height="57.589" x="5.202" y="4.121" fill="currentColor" fill-opacity=".08" rx="2"></rect>
+                <rect width="13.854" height="2.092" x="45.709" y="14.183" fill="currentColor" fill-opacity=".3" rx="1.046"></rect>
+                <rect width="32.801" height="2.092" x="26.762" y="22.875" fill="currentColor" fill-opacity=".3" rx="1.046"></rect>
+                <rect width="41.208" height="2.092" x="18.355" y="31.567" fill="currentColor" fill-opacity=".3" rx="1.046"></rect>
+                <rect width="32.801" height="2.092" x="26.762" y="40.259" fill="currentColor" fill-opacity=".3" rx="1.046"></rect>
+                <rect width="5.775" height="2.092" x="53.788" y="48.952" fill="currentColor" fill-opacity=".3" rx="1.046"></rect>
+              </svg>
+            </label>
+            <input type="checkbox" id="customizer-direction-rtl" class="hidden" data-direction="rtl" />
+          </div>
+          <div class="text-sm text-body-text-secondary-light">
+            Right to left
           </div>
         </div>
       </div>
