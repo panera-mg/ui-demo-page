@@ -8,21 +8,13 @@
   <link rel="shortcut icon" href="./assets/favico-DOxYJrLl.ico" type="image/x-icon">
 
   <script>
-    const storagePrefix = 'panera-mg/';
-    const systemMode = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-    const activeColor = localStorage.getItem(`${storagePrefix}theme/activeColor`)?.replace(/"/g, '') || null;
-    const activeTheme = localStorage.getItem(`${storagePrefix}theme/activeTheme`)?.replace(/"/g, '') || systemMode;
-    if (activeColor) {
-      document.documentElement.style.setProperty('--colors-primary', activeColor)
-    }
-    if (activeTheme) {
-      document.documentElement.classList.remove('light', 'dark');
-    }
-    if (activeTheme !== 'system') {
-      document.documentElement.classList.add(activeTheme);
-    } else {
-      document.documentElement.classList.add(systemMode);
-    }
+    const prefix = 'panera-mg/';
+    const system = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    const color = localStorage.getItem(`${prefix}theme/activeColor`)?.replace(/"/g, '');
+    const theme = localStorage.getItem(`${prefix}theme/activeTheme`)?.replace(/"/g, '') || system;
+    if (color) document.documentElement.style.setProperty('--colors-primary', color);
+    document.documentElement.classList.remove('light', 'dark');
+    document.documentElement.classList.add(theme === 'system' ? system : theme);
 
   </script>
   <script type="module" crossorigin src="./assets/main-D_THHmmh.js"></script>
