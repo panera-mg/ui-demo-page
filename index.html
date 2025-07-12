@@ -10,7 +10,13 @@
   <script>
     function openLocalForageDatabase() {
       return new Promise((resolve, reject) => {
-        const request = indexedDB.open('localforage');
+        const request = indexedDB.open('localforage', 1);
+        request.onupgradeneeded = function(event) {
+          const db = event.target.result;
+          if (!db.objectStoreNames.contains('theme')) {
+            db.createObjectStore('theme');
+          }
+        };
         request.onsuccess = function(event) {
           resolve(event.target.result);
         };
