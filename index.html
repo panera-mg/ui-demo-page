@@ -9,14 +9,24 @@
 
   <script>
     const storagePrefix = 'panera-mg/';
+    const systemMode = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
     const activeColor = localStorage.getItem(`${storagePrefix}theme/activeColor`)?.replace(/"/g, '') || null;
+    const activeTheme = localStorage.getItem(`${storagePrefix}theme/activeTheme`)?.replace(/"/g, '') || systemMode;
     if (activeColor) {
       document.documentElement.style.setProperty('--colors-primary', activeColor)
     }
+    if (activeTheme) {
+      document.documentElement.classList.remove('light', 'dark');
+    }
+    if (activeTheme !== 'system') {
+      document.documentElement.classList.add(activeTheme);
+    } else {
+      document.documentElement.classList.add(systemMode);
+    }
 
   </script>
-  <script type="module" crossorigin src="./assets/main-BX8Q7K34.js"></script>
-  <link rel="stylesheet" crossorigin href="./assets/main-CkFJ3CzG.css">
+  <script type="module" crossorigin src="./assets/main-B_Xl_nWo.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/main-DuPi5i84.css">
 </head>
 
 <body class="font-sans text-base overflow-x-hidden" light="bg-white text-body-text-color-light" dark="bg-dark text-body-text-color-dark">
@@ -102,7 +112,7 @@
         Primary Color
       </div>
 
-      <div class="flex flex-nowrap gap-2">
+      <div class="flex flex-nowrap gap-2 mb-4">
         <div class="border-2 customizer-color w-12 h-12 flex items-center justify-center rounded-md cursor-pointer" light="border-primary" dark="border-primary" hover="border-primary" data-active="true">
           <label for="customizer-color-primary-pink" class="cursor-pointer">
             <span class="w-8 h-8 bg-[#ff385c] flex rounded"></span>
@@ -143,6 +153,46 @@
             <span class="w-8 h-8 bg-[#7aff57] flex rounded"></span>
           </label>
           <input type="checkbox" id="customizer-color-primary-lime green" class="hidden" data-color="#7aff57" />
+        </div>
+      </div>
+
+      <div class="fw-500 mb-2">
+        Theme
+      </div>
+
+      <div class="flex flex-nowrap gap-2">
+        <div class="flex-1 customizer-theme cursor-pointer">
+          <div class="border-2 flex items-center h-11 justify-center rounded-md mb-1 customizer-theme__element" light="border-primary" dark="border-primary" hover="border-primary" data-active="true">
+            <label for="customizer-theme-light" class="cursor-pointer">
+              <div class="i-tabler-sun w-6 h-6"></div>
+            </label>
+            <input type="checkbox" id="customizer-theme-light" class="hidden" data-theme="light" />
+          </div>
+          <div class="text-sm text-body-text-secondary-light">
+            Light
+          </div>
+        </div>
+        <div class="flex-1 customizer-theme cursor-pointer">
+          <div class="border-2 flex items-center h-11 justify-center rounded-md mb-1 customizer-theme__element" light="border-primary" dark="border-primary" hover="border-primary" data-active="true">
+            <label for="customizer-theme-dark" class="cursor-pointer">
+              <div class="i-tabler-moon w-6 h-6"></div>
+            </label>
+            <input type="checkbox" id="customizer-theme-dark" class="hidden" data-theme="dark" />
+          </div>
+          <div class="text-sm text-body-text-secondary-light">
+            Dark
+          </div>
+        </div>
+        <div class="flex-1 customizer-theme cursor-pointer">
+          <div class="border-2 flex items-center h-11 justify-center rounded-md mb-1 customizer-theme__element" light="border-primary" dark="border-primary" hover="border-primary" data-active="true">
+            <label for="customizer-theme-system" class="cursor-pointer">
+              <div class="i-tabler-device-desktop-analytics w-6 h-6"></div>
+            </label>
+            <input type="checkbox" id="customizer-theme-system" class="hidden" data-theme="system" />
+          </div>
+          <div class="text-sm text-body-text-secondary-light">
+            System
+          </div>
         </div>
       </div>
     </div>
