@@ -1,57 +1,180 @@
 <!doctype html>
-<html lang="en" class="dark">
+<html lang="fr" class="light" dir="ltr">
 
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Paneramg Ui Kits</title>
   <link rel="shortcut icon" href="./assets/favico-DOxYJrLl.ico" type="image/x-icon">
-  <script type="module" crossorigin src="./assets/main-ICasF5IF.js"></script>
-  <link rel="stylesheet" crossorigin href="./assets/main-x3q0iScE.css">
+
+  <script>
+    function openLocalForageDatabase() {
+      return new Promise((resolve, reject) => {
+        const request = indexedDB.open('localforage');
+        request.onsuccess = function(event) {
+          resolve(event.target.result);
+        };
+        request.onerror = function(event) {
+          reject(event.target.error);
+        };
+      });
+    }
+
+    function getLocalForageItem(key) {
+      return openLocalForageDatabase().then(db => {
+        return new Promise((resolve, reject) => {
+          const tx = db.transaction('theme', 'readonly');
+          const store = tx.objectStore('theme');
+          const request = store.get(key);
+          request.onsuccess = () => resolve(request.result);
+          request.onerror = () => reject(request.error);
+        });
+      });
+    }
+    getLocalForageItem('activeColor').then(color => {
+      if (color) {
+        document.documentElement.style.setProperty('--colors-primary', color);
+      }
+    });
+
+  </script>
+  <script type="module" crossorigin src="./assets/main-CGrCafBz.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/main-CkFJ3CzG.css">
 </head>
 
-<body class="font-sans text-base" light="bg-white text-body-text-color-light" dark="bg-dark text-body-text-color-dark">
-  <nav class="h-16 flex items-center border-b" light="border-divider-light" dark="bg-elevated-dark border-divider-dark">
-    <div class="flex justify-center md:justify-between items-center w-full h-full app-container">
-      <div class="flex items-center gap-4 h-full">
-        <a href="#">
-          <img src="./assets/logo-panera-mg-full-D1dGZUG9.svg" alt="Paneramg Logo Full" class="h-[46px]">
-        </a>
+<body class="font-sans text-base overflow-x-hidden" light="bg-white text-body-text-color-light" dark="bg-dark text-body-text-color-dark">
+  <header dark="bg-elevated-dark">
+    <nav class="h-16 flex items-center border-b" light="border-divider-light" dark="border-divider-dark">
+      <div class="flex justify-center md:justify-between items-center w-full h-full app-container">
+        <div class="flex items-center gap-4 h-full">
+          <a href="#" class="text-primary">
+            <svg width="203" height="43px" viewBox="0 0 203 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M22.829 42.7084C28.6826 42.7277 33.6164 40.504 37.5569 36.0938C42.7892 30.2406 43.9712 23.1121 41.0425 16.3475C35.6806 3.9642 21.986 0.575347 11.6389 8.01838C11.0759 8.42295 10.6202 9.46283 9.79792 9.00057C8.75291 8.39899 7.80991 7.63466 7.00423 6.73621C6.49719 6.17627 7.38776 5.91014 7.7061 5.60633C10.9278 2.55436 14.8683 1.01222 19.177 0.356136C26.4389 -0.750666 33.0488 0.642258 38.6607 5.66325C45.8659 12.1087 49.093 22.326 44.6071 32.9041C43.6038 35.27 42.3619 37.4336 40.603 39.2834C39.9747 39.9449 39.796 40.3817 40.5677 41.104C41.8541 42.3069 42.918 43.8921 45.0167 43.373C45.9725 43.1368 46.3783 43.7821 46.89 44.2959C49.7783 47.1772 52.6591 50.0658 55.5326 52.9619C57.2202 54.6702 57.4235 57.4091 56.0335 58.932C54.6137 60.488 52.0884 60.3434 50.2106 58.5005C47.1914 55.537 44.2274 52.5212 41.2358 49.5269C40.3429 48.6324 39.6066 47.7133 40.4082 46.3534C40.7579 45.7596 40.4849 45.2528 40.0929 44.7282C38.2565 42.2885 37.8461 42.21 35.1836 43.7791C30.9777 46.2573 26.4335 47.2564 21.5565 47.1264C18.6231 47.0495 19.7346 45.0005 19.6388 43.6052C19.4853 41.4632 21.0962 42.9492 21.8579 42.6577C22.118 42.5554 22.4578 42.68 22.829 42.7084ZM45.5414 44.4982C45.0413 44.4105 44.7989 44.5651 44.6662 44.8643C44.4752 45.2943 44.7582 45.5727 45.0267 45.8419C46.7864 47.6074 48.5476 49.3713 50.3104 51.1336C50.6855 51.509 51.0989 51.9912 51.6244 51.4213C52.1498 50.8514 51.5845 50.4606 51.2339 50.1053C49.5356 48.3855 47.8268 46.6759 46.1075 44.9766C45.9004 44.7705 45.6596 44.5974 45.5414 44.4982ZM54.3475 55.0355C54.863 55.014 55.2496 54.7279 55.1215 54.3664C54.7709 53.3665 54.0138 52.6466 53.0504 52.2328C52.6722 52.0697 52.2603 52.4927 52.3776 52.8558C52.7113 53.881 53.6004 54.4464 54.3475 55.0386V55.0355Z" fill="currentColor" />
+              <path d="M24.6516 28.9907C22.5897 28.0454 21.3378 26.5994 19.7883 25.5903C19.4247 25.3534 19.1348 24.8311 18.6477 25.0142C17.9949 25.2603 18.2534 25.9218 18.2519 26.3987C18.2335 32.4434 18.1874 38.4889 18.2757 44.5321C18.3017 46.2957 18.0026 46.7364 16.1524 46.1696C13.9724 45.5012 12.9943 44.5921 13.0795 42.0808C13.2966 35.6661 13.0795 29.236 13.2045 22.8175C13.239 20.9954 12.5909 19.8817 11.1948 18.8641C8.58057 16.9582 6.04921 14.9245 3.49868 12.9248C1.36697 11.2534 3.74568 10.4073 4.22971 9.25054C4.73828 8.03529 5.50996 8.10451 6.51329 8.89135C12.2096 13.3524 17.9427 17.7688 23.672 22.1976C24.1568 22.5722 24.6478 22.9329 24.6501 23.6274C24.6547 25.3272 24.6516 27.0286 24.6516 28.9907Z" fill="currentColor" />
+              <path d="M5.74234 25.9995C5.78376 26.8817 5.33886 27.2009 4.49507 27.1832C3.56077 27.1624 3.38588 26.634 3.40966 25.8434C3.43344 25.0527 3.86991 24.8258 4.57332 24.7973C5.43551 24.7619 5.8436 25.125 5.74234 25.9995Z" fill="currentColor" />
+              <path d="M2.32733 25.9849C2.41477 26.8532 1.98828 27.1832 1.13912 27.2001C0.186413 27.2201 0.0199603 26.6525 0.000783347 25.8926C-0.0183936 25.1327 0.31375 24.7965 1.08313 24.8012C1.89316 24.8081 2.4094 25.0534 2.32733 25.9849Z" fill="currentColor" />
+              <path d="M4.70989 23.9589C3.86151 24.0112 3.4166 23.7282 3.41123 22.836C3.4074 22.0268 3.6544 21.5969 4.52196 21.5615C5.37342 21.5261 5.72014 21.8876 5.74392 22.7206C5.76693 23.5121 5.58896 24.0512 4.70989 23.9589Z" fill="currentColor" />
+              <path d="M2.23834 22.776C2.26749 23.5398 1.98367 23.9451 1.20739 23.9674C0.342889 23.992 -0.0360489 23.6159 0.0168794 22.7529C0.0583016 22.0845 0.233196 21.5938 1.04323 21.5823C1.91386 21.5708 2.27746 21.9861 2.23834 22.776Z" fill="currentColor" />
+              <path d="M59.5684 38.6645C59.007 38.6645 58.5578 38.5144 58.221 38.2141C57.8841 37.9139 57.7157 37.5011 57.7157 36.9756V22.8456C57.7157 21.532 58.09 20.5093 58.8385 19.7775C59.6058 19.0457 60.6632 18.6797 62.0107 18.6797H66.7548C69.5994 18.6797 71.7609 19.2708 73.2394 20.453C74.7178 21.6352 75.4571 23.371 75.4571 25.6603C75.4571 27.9497 74.7366 29.6854 73.2955 30.8676C71.8545 32.0498 69.7304 32.6409 66.9232 32.6409H61.4492V36.9756C61.4492 37.4823 61.2714 37.8951 60.9159 38.2141C60.579 38.5144 60.1299 38.6645 59.5684 38.6645ZM66.8952 29.7417C70.0953 29.7417 71.6954 28.3813 71.6954 25.6603C71.6954 22.9394 70.0953 21.5789 66.8952 21.5789H62.6563C62.282 21.5789 61.9826 21.7009 61.758 21.9448C61.5522 22.1888 61.4492 22.5266 61.4492 22.9582V29.7417H66.8952Z" fill="currentColor" />
+              <path d="M82.4035 38.6645C81.2432 38.6645 80.2139 38.4675 79.3156 38.0734C78.436 37.6793 77.7436 37.1351 77.2383 36.4408C76.7517 35.7278 76.5084 34.9115 76.5084 33.992C76.5084 32.6034 77.0792 31.4962 78.2208 30.6706C79.3811 29.8449 80.9438 29.4321 82.9088 29.4321C84.6118 29.4321 85.978 29.798 87.0073 30.5298V29.8543C87.0073 28.9723 86.7359 28.2968 86.1932 27.8277C85.6505 27.3586 84.8645 27.124 83.8352 27.124C82.3006 27.124 80.9812 27.4524 79.8771 28.1092C79.4092 28.3719 79.0068 28.5032 78.67 28.5032C78.2583 28.5032 77.8933 28.3156 77.5752 27.9403C77.3693 27.6776 77.2664 27.4055 77.2664 27.124C77.2664 26.6549 77.5097 26.242 77.9962 25.8855C78.67 25.3976 79.5215 25.0129 80.5508 24.7315C81.5801 24.45 82.6655 24.3092 83.8071 24.3092C85.978 24.3092 87.681 24.8065 88.9162 25.8011C90.1701 26.7768 90.797 28.1279 90.797 29.8543V37.0882C90.797 37.5761 90.6286 37.9608 90.2917 38.2423C89.9736 38.5237 89.5338 38.6645 88.9723 38.6645C88.3922 38.6645 87.943 38.5331 87.6249 38.2704C87.3067 38.0077 87.1477 37.6324 87.1477 37.1445V36.8349C86.0809 38.0546 84.4996 38.6645 82.4035 38.6645ZM83.2738 36.0749C84.4528 36.0749 85.3698 35.8966 86.0248 35.5401C86.6985 35.1648 87.0354 34.6488 87.0354 33.992C87.0354 33.3728 86.6985 32.8755 86.0248 32.5002C85.3511 32.1249 84.4528 31.9372 83.3299 31.9372C82.3193 31.9372 81.5333 32.1155 80.9719 32.472C80.4291 32.8286 80.1578 33.3352 80.1578 33.992C80.1578 34.6488 80.4291 35.1648 80.9719 35.5401C81.5146 35.8966 82.2819 36.0749 83.2738 36.0749Z" fill="currentColor" />
+              <path d="M95.0622 38.6645C94.482 38.6645 94.0329 38.5144 93.7147 38.2141C93.3966 37.9139 93.2375 37.5011 93.2375 36.9756V25.9981C93.2375 25.4539 93.3872 25.0411 93.6866 24.7596C94.0048 24.4594 94.4446 24.3092 95.006 24.3092C95.5675 24.3092 96.0072 24.4594 96.3254 24.7596C96.6435 25.0598 96.8026 25.4727 96.8026 25.9981V26.8144C98.1314 25.1443 99.9467 24.3092 102.249 24.3092C104.045 24.3092 105.458 24.8816 106.487 26.0262C107.535 27.1521 108.059 28.6909 108.059 30.6424V36.9756C108.059 37.5011 107.891 37.9139 107.554 38.2141C107.217 38.5144 106.768 38.6645 106.207 38.6645C105.627 38.6645 105.177 38.5144 104.859 38.2141C104.541 37.9139 104.382 37.5011 104.382 36.9756V30.6424C104.382 29.5728 104.12 28.7378 103.596 28.1373C103.072 27.5368 102.342 27.2366 101.406 27.2366C99.9841 27.2366 98.8799 27.6588 98.0939 28.5032C97.3079 29.3289 96.9149 30.4923 96.9149 31.9935V36.9756C96.9149 37.5011 96.7465 37.9139 96.4096 38.2141C96.0728 38.5144 95.6236 38.6645 95.0622 38.6645Z" fill="currentColor" />
+              <path d="M118.172 38.6645C116.562 38.6645 115.159 38.3736 113.961 37.7919C112.763 37.2102 111.837 36.3939 111.182 35.3431C110.546 34.2735 110.228 33.0256 110.228 31.5995C110.228 29.2914 110.892 27.4993 112.221 26.2233C113.568 24.9473 115.458 24.3092 117.891 24.3092C119.388 24.3092 120.708 24.5438 121.849 25.0129C123.01 25.4821 123.908 26.1388 124.544 26.9833C125.199 27.8089 125.527 28.7566 125.527 29.8262C125.527 30.7269 125.237 31.4212 124.656 31.9091C124.095 32.397 123.29 32.6409 122.242 32.6409H113.793C113.793 33.6918 114.158 34.4893 114.887 35.0335C115.636 35.5589 116.731 35.8216 118.172 35.8216C119.688 35.8216 120.979 35.4838 122.046 34.8083C122.645 34.433 123.112 34.2453 123.449 34.2453C123.768 34.2453 124.076 34.3954 124.376 34.6957C124.694 35.0147 124.853 35.3618 124.853 35.7371C124.853 36.1875 124.666 36.544 124.292 36.8067C123.506 37.4072 122.588 37.867 121.54 38.186C120.492 38.505 119.37 38.6645 118.172 38.6645ZM121.119 30.0513C121.438 30.0513 121.662 29.995 121.793 29.8825C121.924 29.7511 121.99 29.5447 121.99 29.2632C121.99 28.6064 121.615 28.0904 120.867 27.7151C120.137 27.3398 119.145 27.1521 117.891 27.1521C116.637 27.1521 115.645 27.4149 114.916 27.9403C114.204 28.4657 113.849 29.1694 113.849 30.0513H121.119Z" fill="currentColor" />
+              <path d="M129.658 38.6645C129.078 38.6645 128.629 38.5144 128.311 38.2141C127.993 37.9139 127.834 37.5011 127.834 36.9756V25.9981C127.834 25.4539 127.984 25.0411 128.283 24.7596C128.601 24.4594 129.041 24.3092 129.602 24.3092C130.164 24.3092 130.604 24.4594 130.922 24.7596C131.24 25.0598 131.399 25.4727 131.399 25.9981V26.927C131.979 26.1764 132.653 25.604 133.42 25.21C134.206 24.7971 135.048 24.5907 135.947 24.5907H136.564C137.163 24.5907 137.622 24.7221 137.94 24.9848C138.277 25.2287 138.445 25.5853 138.445 26.0544C138.445 26.5235 138.277 26.8894 137.94 27.1521C137.622 27.3961 137.163 27.5181 136.564 27.5181H135.61C134.356 27.5181 133.355 27.9215 132.606 28.7284C131.876 29.5165 131.511 30.6049 131.511 31.9935V36.9756C131.511 37.5011 131.343 37.9139 131.006 38.2141C130.669 38.5144 130.22 38.6645 129.658 38.6645Z" fill="currentColor" />
+              <path d="M144.551 38.6645C143.391 38.6645 142.361 38.4675 141.463 38.0734C140.583 37.6793 139.891 37.1351 139.386 36.4408C138.899 35.7278 138.656 34.9115 138.656 33.992C138.656 32.6034 139.227 31.4962 140.368 30.6706C141.528 29.8449 143.091 29.4321 145.056 29.4321C146.759 29.4321 148.125 29.798 149.155 30.5298V29.8543C149.155 28.9723 148.883 28.2968 148.341 27.8277C147.798 27.3586 147.012 27.124 145.982 27.124C144.448 27.124 143.129 27.4524 142.024 28.1092C141.556 28.3719 141.154 28.5032 140.817 28.5032C140.406 28.5032 140.041 28.3156 139.722 27.9403C139.517 27.6776 139.414 27.4055 139.414 27.124C139.414 26.6549 139.657 26.242 140.144 25.8855C140.817 25.3976 141.669 25.0129 142.698 24.7315C143.727 24.45 144.813 24.3092 145.954 24.3092C148.125 24.3092 149.828 24.8065 151.063 25.8011C152.317 26.7768 152.944 28.1279 152.944 29.8543V37.0882C152.944 37.5761 152.776 37.9608 152.439 38.2423C152.121 38.5237 151.681 38.6645 151.12 38.6645C150.539 38.6645 150.09 38.5331 149.772 38.2704C149.454 38.0077 149.295 37.6324 149.295 37.1445V36.8349C148.228 38.0546 146.647 38.6645 144.551 38.6645ZM145.421 36.0749C146.6 36.0749 147.517 35.8966 148.172 35.5401C148.846 35.1648 149.183 34.6488 149.183 33.992C149.183 33.3728 148.846 32.8755 148.172 32.5002C147.498 32.1249 146.6 31.9372 145.477 31.9372C144.467 31.9372 143.681 32.1155 143.119 32.472C142.576 32.8286 142.305 33.3352 142.305 33.992C142.305 34.6488 142.576 35.1648 143.119 35.5401C143.662 35.8966 144.429 36.0749 145.421 36.0749Z" fill="currentColor" />
+              <path d="M157.518 38.6645C156.957 38.6645 156.508 38.5144 156.171 38.2141C155.834 37.9139 155.666 37.5011 155.666 36.9756V25.3788C155.666 23.2021 156.283 21.4945 157.518 20.256C158.753 19.0175 160.456 18.3983 162.627 18.3983C163.675 18.3983 164.658 18.661 165.575 19.1864C166.511 19.693 167.315 20.4249 167.989 21.3819C168.644 20.4061 169.43 19.6649 170.347 19.1582C171.283 18.6516 172.293 18.3983 173.379 18.3983C175.55 18.3983 177.253 19.0175 178.488 20.256C179.723 21.4945 180.341 23.2021 180.341 25.3788V36.9756C180.341 37.4823 180.163 37.8951 179.807 38.2141C179.47 38.5144 179.021 38.6645 178.46 38.6645C177.898 38.6645 177.449 38.5144 177.112 38.2141C176.776 37.9139 176.607 37.5011 176.607 36.9756V25.3788C176.607 23.9527 176.345 22.93 175.821 22.3108C175.297 21.6728 174.436 21.3537 173.238 21.3537C172.153 21.3537 171.311 21.7009 170.712 22.3952C170.132 23.0895 169.842 24.0841 169.842 25.3788V36.9756C169.842 37.5011 169.673 37.9139 169.336 38.2141C169 38.5144 168.55 38.6645 167.989 38.6645C167.428 38.6645 166.978 38.5144 166.642 38.2141C166.323 37.9139 166.164 37.5011 166.164 36.9756V25.3788C166.164 24.1216 165.865 23.1364 165.266 22.4234C164.667 21.7103 163.834 21.3537 162.768 21.3537C161.57 21.3537 160.709 21.6728 160.185 22.3108C159.661 22.93 159.399 23.9527 159.399 25.3788V36.9756C159.399 37.4823 159.221 37.8951 158.866 38.2141C158.529 38.5144 158.08 38.6645 157.518 38.6645Z" fill="currentColor" />
+              <path d="M193.238 38.6645C191.123 38.6645 189.289 38.261 187.736 37.4541C186.183 36.6472 184.994 35.4838 184.171 33.9638C183.347 32.4439 182.936 30.6424 182.936 28.5595C182.936 26.4766 183.347 24.6752 184.171 23.1552C184.994 21.6165 186.173 20.4436 187.708 19.6367C189.261 18.8111 191.086 18.3983 193.182 18.3983C194.922 18.3983 196.532 18.6985 198.01 19.299C199.489 19.8995 200.584 20.697 201.295 21.6915C201.519 21.9918 201.632 22.3014 201.632 22.6204C201.632 23.0895 201.379 23.5117 200.874 23.887C200.649 24.0559 200.368 24.1404 200.031 24.1404C199.751 24.1404 199.47 24.0841 199.189 23.9715C198.909 23.8401 198.675 23.6618 198.488 23.4367C197.851 22.7048 197.112 22.1794 196.27 21.8604C195.428 21.5226 194.398 21.3537 193.182 21.3537C191.142 21.3537 189.551 21.9918 188.41 23.2678C187.268 24.525 186.697 26.289 186.697 28.5595C186.697 30.8113 187.268 32.5659 188.41 33.8231C189.57 35.0804 191.18 35.709 193.238 35.709C194.941 35.709 196.27 35.3806 197.224 34.7238C198.197 34.0671 198.684 33.157 198.684 31.9935V31.3743C198.684 30.9802 198.59 30.7081 198.403 30.558C198.235 30.4079 197.935 30.3328 197.505 30.3328H193.828C193.304 30.3328 192.892 30.2108 192.592 29.9669C192.293 29.7042 192.143 29.3477 192.143 28.8973C192.143 28.4282 192.284 28.0716 192.564 27.8277C192.864 27.565 193.285 27.4336 193.828 27.4336H199.274C200.359 27.4336 201.154 27.6682 201.66 28.1373C202.165 28.5877 202.418 29.3101 202.418 30.3047V31.4024C202.418 32.8286 202.034 34.0952 201.267 35.2023C200.499 36.2907 199.414 37.1445 198.01 37.7638C196.625 38.3642 195.035 38.6645 193.238 38.6645Z" fill="currentColor" />
+            </svg>
+          </a>
 
-        <ul class="hidden md:flex h-full">
-          <li class="px-2 h-full inline-flex items-center">
-            <a href="#" class="hover:text-primary">Acheter</a>
+          <ul class="hidden md:flex h-full">
+            <li class="px-2 h-full inline-flex items-center">
+              <a href="#" class="hover:text-primary">Acheter</a>
+            </li>
+            <!-- active -->
+            <li class="px-2 h-full inline-flex items-center border-b-2 border-primary">
+              <a href="#" class="text-primary">Louer</a>
+            </li>
+            <li class="px-2 h-full inline-flex items-center">
+              <a href="#" class="hover:text-primary">Vendre</a>
+            </li>
+            <li class="px-2 h-full items-center hidden xl:inline-flex">
+              <a href="#" class="hover:text-primary">Agent immobiliers</a>
+            </li>
+            <li class="px-2 h-full inline-flex items-center">
+              <a href="#" class="hover:text-primary">Colocation</a>
+            </li>
+          </ul>
+        </div>
+
+        <ul class="hidden md:flex">
+          <li class="px-2 hidden lg:inline-flex">
+            <a href="#" class="hover:text-primary">Ajouter une annonce</a>
           </li>
-          <!-- active -->
-          <li class="px-2 h-full inline-flex items-center border-b-2 border-primary">
-            <a href="#" class="text-primary">Louer</a>
+          <li class="px-2">
+            <a href="#" class="hover:text-primary">S' inscrire</a>
           </li>
-          <li class="px-2 h-full inline-flex items-center">
-            <a href="#" class="hover:text-primary">Vendre</a>
-          </li>
-          <li class="px-2 h-full items-center hidden xl:inline-flex">
-            <a href="#" class="hover:text-primary">Agent immobiliers</a>
-          </li>
-          <li class="px-2 h-full inline-flex items-center">
-            <a href="#" class="hover:text-primary">Colocation</a>
+          <li class="px-2">
+            <a href="#" class="px-6 py-2 bg-primary hover:brightness-120 text-white rounded-[6px]">
+              Se connecter
+            </a>
           </li>
         </ul>
       </div>
+    </nav>
+  </header>
 
-      <ul class="hidden md:flex">
-        <li class="px-2 hidden lg:inline-flex">
-          <a href="#" class="hover:text-primary">Ajouter une annonce</a>
-        </li>
-        <li class="px-2">
-          <a href="#" class="hover:text-primary">S' inscrire</a>
-        </li>
-        <li class="px-2">
-          <a href="#" class="px-6 py-2 bg-primary hover:bg-primary-hover text-white rounded-[6px]">Se
-            connecter</a>
-        </li>
-      </ul>
+  <nav light="bg-white border-divider-light" dark="bg-elevated-dark border-divider-dark" class="fixed right-0 top-0 bottom-0 w-[400px] border-l z-1 customizer-sidebar hidden translate-x-full transition-transform duration-200 ease-in" data-show-when-loaded>
+    <div class="px-6 py-2 border-b flex justify-between items-center" light="border-divider-light" dark="border-divider-dark">
+      <div>
+        <h2 class="fw-500">
+          Customiseur de template
+        </h2>
+        <p class="text-sm" light="text-body-text-secondary-light" dark="text-body-text-secondary-dark">
+          Customisez en temps réel.
+        </p>
+      </div>
+
+      <div class="flex gap-2 text-2xl">
+        <div class="i-tabler-refresh cursor-pointer"></div>
+        <div class="i-tabler-x cursor-pointer customizer-sidebar__closer"></div>
+      </div>
+    </div>
+
+    <div class="px-6 py-4">
+      <div class="fw-500 mb-2">
+        Primary Color
+      </div>
+
+      <div class="flex flex-nowrap gap-2">
+        <div class="border-2 customizer-color w-12 h-12 flex items-center justify-center rounded-md cursor-pointer" light="border-primary" dark="border-primary" hover="border-primary" data-active="true">
+          <label for="customizer-color-primary-pink" class="cursor-pointer">
+            <span class="w-8 h-8 bg-[#ff385c] flex rounded"></span>
+          </label>
+          <input type="checkbox" id="customizer-color-primary-pink" class="hidden" data-color="#ff385c" />
+        </div>
+
+        <div class="border-2 customizer-color w-12 h-12 flex items-center justify-center rounded-md cursor-pointer" light="border-divider-light" dark="border-divider-dark" hover="border-primary">
+          <label for="customizer-color-primary-violet" class="cursor-pointer">
+            <span class="w-8 h-8 bg-[#7367f0] flex rounded"></span>
+          </label>
+          <input type="checkbox" id="customizer-color-primary-violet" class="hidden" data-color="#7367f0" />
+        </div>
+
+        <div class="border-2 customizer-color w-12 h-12 flex items-center justify-center rounded-md cursor-pointer" light="border-divider-light" dark="border-divider-dark" hover="border-primary">
+          <label for="customizer-color-primary-teal" class="cursor-pointer">
+            <span class="w-8 h-8 bg-[#0D9394] flex rounded"></span>
+          </label>
+          <input type="checkbox" id="customizer-color-primary-teal" class="hidden" data-color="#0D9394" />
+        </div>
+
+        <div class="border-2 customizer-color w-12 h-12 flex items-center justify-center rounded-md cursor-pointer" light="border-divider-light" dark="border-divider-dark" hover="border-primary">
+          <label for="customizer-color-primary-amber" class="cursor-pointer">
+            <span class="w-8 h-8 bg-[#FFAB1D] flex rounded"></span>
+          </label>
+          <input type="checkbox" id="customizer-color-primary-amber" class="hidden" data-color="#FFAB1D" />
+        </div>
+
+        <div class="border-2 customizer-color w-12 h-12 flex items-center justify-center rounded-md cursor-pointer" light="border-divider-light" dark="border-divider-dark" hover="border-primary">
+          <label for="customizer-color-primary-azure blue" class="cursor-pointer">
+            <span class="w-8 h-8 bg-[#2092EC] flex rounded"></span>
+          </label>
+          <input type="checkbox" id="customizer-color-primary-azure blue" class="hidden" data-color="#2092EC" />
+        </div>
+
+        <div class="border-2 customizer-color w-12 h-12 flex items-center justify-center rounded-md cursor-pointer" light="border-divider-light" dark="border-divider-dark" hover="border-primary">
+          <label for="customizer-color-primary-lime green" class="cursor-pointer">
+            <span class="w-8 h-8 bg-[#7aff57] flex rounded"></span>
+          </label>
+          <input type="checkbox" id="customizer-color-primary-lime green" class="hidden" data-color="#7aff57" />
+        </div>
+      </div>
+    </div>
     </div>
   </nav>
+
+  <button class="text-[22px] w-8 h-8 bg-primary hover:brightness-120 flex items-center text-white justify-center rounded-md absolute -right-[4px] z-0 top-[50%] -translate-y-1/2  cursor-pointer customizer-sidebar__toggler">
+    <div class="i-tabler-settings"></div>
+  </button>
 
 </body>
 
