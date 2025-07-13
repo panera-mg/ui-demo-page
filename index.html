@@ -5,20 +5,30 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Paneramg Ui Kits</title>
-  <link rel="shortcut icon" href="./assets/favico-DOxYJrLl.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="./assets/favico-DOxYJrLl.ico" type="image/x-icon" />
 
   <script>
-    const prefix = 'panera-mg/';
-    const system = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-    const color = localStorage.getItem(`${prefix}theme/activeColor`)?.replace(/"/g, '');
-    const theme = localStorage.getItem(`${prefix}theme/activeTheme`)?.replace(/"/g, '') || system;
-    const direction = localStorage.getItem(`${prefix}theme/activeDirection`)?.replace(/"/g, '') || 'ltr';
-    if (color) document.documentElement.style.setProperty('--colors-primary', color);
-    document.documentElement.classList.remove('light', 'dark');
-    document.documentElement.classList.add(theme === 'system' ? system : theme);
-    document.documentElement.setAttribute('dir', direction);
+    const prefix = "panera-mg/";
+    const system = window.matchMedia("(prefers-color-scheme: dark)").matches ?
+      "dark" :
+      "light";
+    const color = localStorage
+      .getItem(`${prefix}theme/activeColor`)
+      ?.replace(/"/g, "");
+    const theme =
+      localStorage.getItem(`${prefix}theme/activeTheme`)?.replace(/"/g, "") ||
+      system;
+    const direction =
+      localStorage.getItem(`${prefix}theme/activeDirection`)?.replace(/"/g, "") ||
+      "ltr";
+    if (color)
+      document.documentElement.style.setProperty("--colors-primary", color);
+    document.documentElement.classList.remove("light", "dark");
+    document.documentElement.classList.add(theme === "system" ? system : theme);
+    document.documentElement.setAttribute("dir", direction);
 
   </script>
+
   <script type="module" crossorigin src="./assets/main-D34Ulixw.js"></script>
   <link rel="stylesheet" crossorigin href="./assets/main-DnZtjsJB.css">
 </head>
@@ -90,73 +100,55 @@
             <li class="h-full">
               <a class="h-full inline-flex flex-col gap-2 items-center justify-center border-b" dark="text-white border-white" light="text-body-text-color-light border-body-text-color-light" href="#">
                 <div class="i-tabler-flame w-[18px] h-[18px]"></div>
-                <div>
-                  Tendances
-                </div>
+                <div>Tendances</div>
               </a>
             </li>
             <li class="h-full">
               <a class="h-full inline-flex flex-col gap-2 items-center justify-center" dark="hover:text-white" light="hover:text-body-text-color-light" href="#">
                 <div class="i-tabler-home-search w-[18px] h-[18px]"></div>
-                <div>
-                  Appartements
-                </div>
+                <div>Appartements</div>
               </a>
             </li>
             <li class="h-full">
               <a class="h-full inline-flex flex-col gap-2 items-center justify-center" dark="hover:text-white" light="hover:text-body-text-color-light" href="#">
                 <div class="i-tabler-building-fortress w-[18px] h-[18px]"></div>
-                <div>
-                  Villa
-                </div>
+                <div>Villa</div>
               </a>
             </li>
             <li class="h-full">
               <a class="h-full inline-flex flex-col gap-2 items-center justify-center" dark="hover:text-white" light="hover:text-body-text-color-light" href="#">
                 <div class="i-tabler-building-cottage w-[18px] h-[18px]"></div>
-                <div>
-                  Espaces
-                </div>
+                <div>Espaces</div>
               </a>
             </li>
             <li class="h-full">
               <a class="h-full inline-flex flex-col gap-2 items-center justify-center" dark="hover:text-white" light="hover:text-body-text-color-light" href="#">
                 <div class="i-tabler-building-estate w-[18px] h-[18px]"></div>
-                <div>
-                  Coworking
-                </div>
+                <div>Coworking</div>
               </a>
             </li>
             <li class="h-full">
               <a class="h-full inline-flex flex-col gap-2 items-center justify-center" dark="hover:text-white" light="hover:text-body-text-color-light" href="#">
                 <div class="i-tabler-bed w-[18px] h-[18px]"></div>
-                <div>
-                  Chambres
-                </div>
+                <div>Chambres</div>
               </a>
             </li>
             <li class="h-full">
               <a class="h-full inline-flex flex-col gap-2 items-center justify-center" dark="hover:text-white" light="hover:text-body-text-color-light" href="#">
                 <div class="i-tabler-texture w-[18px] h-[18px]"></div>
-                <div>
-                  Terrains
-                </div>
+                <div>Terrains</div>
               </a>
             </li>
             <li class="h-full">
               <a class="h-full inline-flex flex-col gap-2 items-center justify-center" dark="hover:text-white" light="hover:text-body-text-color-light" href="#">
                 <div class="i-tabler-armchair-2 w-[18px] h-[18px]"></div>
-                <div>
-                  Meubles
-                </div>
+                <div>Meubles</div>
               </a>
             </li>
             <li class="h-full">
               <a class="h-full inline-flex flex-col gap-2 items-center justify-center" dark="hover:text-white" light="hover:text-body-text-color-light" href="#">
                 <div class="i-tabler-lamp-2 w-[18px] h-[18px]"></div>
-                <div>
-                  Accessoires
-                </div>
+                <div>Accessoires</div>
               </a>
             </li>
           </ul>
@@ -171,13 +163,10 @@
       </div>
     </nav>
   </header>
-
   <nav light="bg-white border-divider-light" dark="bg-elevated-dark border-divider-dark" class="fixed right-0 top-0 bottom-0 w-[400px] border-l z-1 customizer-sidebar hidden translate-x-full transition-transform duration-200 ease-in" data-show-when-loaded>
     <div class="px-6 py-2 border-b flex justify-between items-center" light="border-divider-light" dark="border-divider-dark">
       <div>
-        <h2 class="fw-500">
-          Customiseur de template
-        </h2>
+        <h2 class="fw-500">Customiseur de template</h2>
         <p class="text-sm" light="text-body-text-secondary-light" dark="text-body-text-secondary-dark">
           Customisez en temps réel.
         </p>
@@ -190,9 +179,7 @@
     </div>
 
     <div class="px-6 py-4">
-      <div class="fw-500 mb-2">
-        Primary Color
-      </div>
+      <div class="fw-500 mb-2">Primary Color</div>
 
       <div class="flex flex-nowrap gap-2 mb-4">
         <div class="border-2 customizer-color w-12 h-12 flex items-center justify-center rounded-md cursor-pointer" light="border-primary" dark="border-primary" hover="border-primary" data-active="true">
@@ -238,9 +225,7 @@
         </div>
       </div>
 
-      <div class="fw-500 mb-2">
-        Theme
-      </div>
+      <div class="fw-500 mb-2">Theme</div>
 
       <div class="flex flex-nowrap gap-2 mb-4">
         <div class="flex-1 customizer-theme cursor-pointer">
@@ -250,9 +235,7 @@
             </label>
             <input type="checkbox" id="customizer-theme-light" class="hidden" data-theme="light" />
           </div>
-          <div class="text-sm text-body-text-secondary-light">
-            Light
-          </div>
+          <div class="text-sm text-body-text-secondary-light">Light</div>
         </div>
         <div class="flex-1 customizer-theme cursor-pointer">
           <div class="border-2 flex items-center h-11 justify-center rounded-md mb-1 customizer-theme__element" light="border-divider-light" dark="border-divider-dark" hover="border-primary" data-active="true">
@@ -261,9 +244,7 @@
             </label>
             <input type="checkbox" id="customizer-theme-dark" class="hidden" data-theme="dark" />
           </div>
-          <div class="text-sm text-body-text-secondary-light">
-            Dark
-          </div>
+          <div class="text-sm text-body-text-secondary-light">Dark</div>
         </div>
         <div class="flex-1 customizer-theme cursor-pointer">
           <div class="border-2 flex items-center h-11 justify-center rounded-md mb-1 customizer-theme__element" light="border-divider-light" dark="border-divider-dark" hover="border-primary" data-active="true">
@@ -272,15 +253,11 @@
             </label>
             <input type="checkbox" id="customizer-theme-system" class="hidden" data-theme="system" />
           </div>
-          <div class="text-sm text-body-text-secondary-light">
-            System
-          </div>
+          <div class="text-sm text-body-text-secondary-light">System</div>
         </div>
       </div>
 
-      <div class="fw-500 mb-2">
-        Direction
-      </div>
+      <div class="fw-500 mb-2">Direction</div>
 
       <div class="flex flex-nowrap gap-2">
         <div class="customizer-direction cursor-pointer">
@@ -304,9 +281,7 @@
             </label>
             <input type="checkbox" id="customizer-direction-ltr" class="hidden" data-direction="ltr" />
           </div>
-          <div class="text-sm text-body-text-secondary-light">
-            Left to right
-          </div>
+          <div class="text-sm text-body-text-secondary-light">Left to right</div>
         </div>
 
         <div class="customizer-direction cursor-pointer">
@@ -330,17 +305,14 @@
             </label>
             <input type="checkbox" id="customizer-direction-rtl" class="hidden" data-direction="rtl" />
           </div>
-          <div class="text-sm text-body-text-secondary-light">
-            Right to left
-          </div>
+          <div class="text-sm text-body-text-secondary-light">Right to left</div>
         </div>
       </div>
-    </div>
     </div>
   </nav>
 
   <div>
-    <button class="text-[22px] w-8 h-8 bg-primary hover:brightness-120 flex items-center text-white justify-center rounded-md absolute -right-[4px] z-0 top-[50%] -translate-y-1/2  cursor-pointer customizer-sidebar__toggler">
+    <button class="text-[22px] w-8 h-8 bg-primary hover:brightness-120 flex items-center text-white justify-center rounded-md absolute -right-[4px] z-0 top-[50%] -translate-y-1/2 cursor-pointer customizer-sidebar__toggler">
       <div class="i-tabler-settings animate-spin"></div>
     </button>
   </div>
